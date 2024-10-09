@@ -73,7 +73,7 @@ export const getJournals = async () => {
     const source = sources[i];
     const feed = await parser.parseURL(source.data.url);
     for (let index = 0; index < feed.items.length; index++) {
-      await fakePromise(1);
+      await fakePromise(1000);
       const item = feed.items[index];
       const journal = getRawJournal(
         item,
