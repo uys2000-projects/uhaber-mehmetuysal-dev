@@ -3,7 +3,13 @@ import { getJournals, sumJournal } from "../bot/main";
 
 export const getJournalScheduler = () => {
   const options = { scheduled: true, timezone: "Europe/Istanbul" };
-  const task = cron.schedule("* 0 * * *", getJournals, options);
+  const task = cron.schedule(
+    "* 0 * * *",
+    () => {
+      getJournals().catch(() => {});
+    },
+    options
+  );
   setTimeout(() => {
     task.start();
   });
@@ -12,7 +18,13 @@ export const getJournalScheduler = () => {
 
 export const sumJournalScheduler = () => {
   const options = { scheduled: true, timezone: "Europe/Istanbul" };
-  const task = cron.schedule("* * * * *", sumJournal, options);
+  const task = cron.schedule(
+    "* * * * *",
+    () => {
+      sumJournal().catch(() => {});
+    },
+    options
+  );
   setTimeout(() => {
     task.start();
   });

@@ -101,7 +101,7 @@ export const sumJournal = async () => {
   const journal = await getFirstURDocument<UJournal>(RAWJOURNAL);
   if (journal) {
     const page = await get(journal.data.rss.url);
-    const content = await generateContent(
+    const content = await generateContent.pLogger(
       `bu sayfada ki haberi ozetleyip ve yeni bir baslik olusturarak {title, summary} seklinde json olarak cevap ver, haber: \n\n ${page.data}`
     );
     const result = JSON.parse(
